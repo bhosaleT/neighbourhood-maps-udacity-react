@@ -1,7 +1,10 @@
 import React from "react";
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 
 export class Map extends React.Component {
+  constructor(props){
+    this.map = React.createRef();
+  }
   componentDidMount() {
     this.loadMap();
   }
@@ -29,6 +32,6 @@ export class Map extends React.Component {
     }
   }
   render() {
-    return <div ref='map'>Loading Map......</div>;
+    return <div ref={this.map}>Loading Map......</div>;
   }
 }

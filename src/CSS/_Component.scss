@@ -1,14 +1,28 @@
 /* THIS IS THE HEADER COMPONENT */
 
 .header {
-    background-color: $primary-color;
-    margin-top: -2rem;
-    text-align: center;
+  background-color: $primary-color;
+  margin-top: -2rem;
+  text-align: center;
 
-    &__primary-heading{
-        color: white;
-        padding: 2rem;
-        font-size: 2.5rem;
-        text-transform: uppercase;
-    }
+  &__primary-heading {
+    color: white;
+    padding: 2rem;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+  }
+}
+
+/* MAP COMPONENT */
+#map {
+  height: 100vh;
+  margin-top: -2rem;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }

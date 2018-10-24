@@ -1,11 +1,12 @@
 import React from "react";
 import markerImageBasic from "../images/icon-large.png";
-import markerImageHotel from '../images/hotel-large.png';
-import markerImageTheater from '../images/theater-large.png';
-import markerImageBakery from '../images/bakery-large.png';
-import markerImageScenic from '../images/scenic-large.png';
-import markerImageRestro from '../images/food.png';
+import markerImageHotel from "../images/hotel-large.png";
+import markerImageTheater from "../images/theater-large.png";
+import markerImageBakery from "../images/bakery-large.png";
+import markerImageScenic from "../images/scenic-large.png";
+import markerImageRestro from "../images/food.png";
 import api from "./utils/api";
+import LocationList from "./LocationList";
 
 export default class Map extends React.Component {
   state = {
@@ -24,42 +25,38 @@ export default class Map extends React.Component {
     });
   }
 
-
-  selectMarker(currentLocationType){
-      console.log(currentLocationType);
-   if(currentLocationType === "Hotel")
-   {
-       this.setState({
-           markerImage: markerImageHotel
-       })
-   }
-   else if(currentLocationType === "Theater"){
-    this.setState({
-           markerImage: markerImageTheater
-       })
-   }
-   else if(currentLocationType === "Bakery"){
-    this.setState({
-           markerImage: markerImageBakery
-       })
-   }
-   else if(currentLocationType === "Scenic Lookout"){
-    this.setState({
-           markerImage: markerImageScenic
-       })
-   }
-   else if(currentLocationType === "Coffee Shop" || "American Restaurant" || "Fast Food Restaurant"){
-    this.setState({
-           markerImage: markerImageRestro
-       })
-   }
-   else{
-       this.setState({
-           markerImage: markerImageBasic
-       })
-   }
+  selectMarker(currentLocationType) {
+    console.log(currentLocationType);
+    if (currentLocationType === "Hotel") {
+      this.setState({
+        markerImage: markerImageHotel
+      });
+    } else if (currentLocationType === "Theater") {
+      this.setState({
+        markerImage: markerImageTheater
+      });
+    } else if (currentLocationType === "Bakery") {
+      this.setState({
+        markerImage: markerImageBakery
+      });
+    } else if (currentLocationType === "Scenic Lookout") {
+      this.setState({
+        markerImage: markerImageScenic
+      });
+    } else if (
+      currentLocationType === "Coffee Shop" ||
+      "American Restaurant" ||
+      "Fast Food Restaurant"
+    ) {
+      this.setState({
+        markerImage: markerImageRestro
+      });
+    } else {
+      this.setState({
+        markerImage: markerImageBasic
+      });
+    }
   }
-  
 
   loadMap = () => {
     loadScript(
@@ -264,7 +261,6 @@ export default class Map extends React.Component {
     });
 
     this.state.locations.map(location => {
-      
       this.selectMarker(location.venue.categories[0].name);
 
       var marker = new window.google.maps.Marker({
@@ -282,7 +278,12 @@ export default class Map extends React.Component {
   };
 
   render() {
-    return <div id="map" />;
+    return (
+      <div className="body-content">
+        <LocationList locations={this.state.locations} />
+        <div id="map" />
+      </div>
+    );
   }
 }
 

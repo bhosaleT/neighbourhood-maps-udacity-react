@@ -20,14 +20,37 @@
   padding: 0;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+.body-content {
+  display: flex;
+  // flex-direction: column;
+  &__list {
+    flex: 0 0 18%;
+  }
+
+  &__map {
+    flex: 1;
+  }
 }
 
-.body-content{
-display: flex;
-flex-direction: column;
+.location-list {
+  background-color: $primary-color;
+  margin-top: -18px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__item {
+    font-size: 1.8rem;
+    padding: 1rem 1rem 1rem 1rem;
+    color: white;
+    list-style: none;
+  }
+}
+
+.legal {
+  font-size: 1.8rem;
+  padding: 1rem;
+  color: white;
+  text-align: center;
 }

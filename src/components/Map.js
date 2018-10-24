@@ -280,8 +280,8 @@ export default class Map extends React.Component {
   render() {
     return (
       <div className="body-content">
-        <LocationList locations={this.state.locations} />
-        <div id="map" />
+        <LocationList className="body-content__list"  locations = {this.state.locations}/>
+        <div className="body-content__map" id="map" />
       </div>
     );
   }

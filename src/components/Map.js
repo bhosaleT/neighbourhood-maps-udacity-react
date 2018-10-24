@@ -1,9 +1,25 @@
 import React from "react";
+import markerImage from "../images/icon-large.png";
+import api from "./utils/api";
 
 export default class Map extends React.Component {
+  state = {
+    locations: [],
+    marker: undefined
+  };
+
   componentDidMount() {
-    this.loadMap();
+    api.discoverLocations().then(locations => {
+      this.setState(
+        {
+          locations
+        },
+        this.loadMap()
+      );
+    });
   }
+
+  
 
   loadMap = () => {
     loadScript(
@@ -204,16 +220,22 @@ export default class Map extends React.Component {
       zoom: 12,
       styles: styles,
       disableDefaultUI: true
+      //   gestureHandling: 'greedy'
     });
-    
-    // const markerImage = "../images/marker.png ";
-    var marker = new window.google.maps.Marker({
-        position:{ lat: 19.076, lng: 72.8777 },
+
+    this.state.locations.map(location => {
+      var marker = new window.google.maps.Marker({
+        position: {
+          lat: location.venue.location.lat,
+          lng: location.venue.location.lng
+        },
         map: map,
-        // icon: markerImage,
+        icon: markerImage,
         animation: window.google.maps.Animation.DROP,
-        title: 'Hello World'
-    })
+        title: location.venue.name
+      });
+      return marker;
+    });
   };
 
   render() {

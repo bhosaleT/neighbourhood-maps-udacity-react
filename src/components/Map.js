@@ -1,11 +1,16 @@
 import React from "react";
-import markerImage from "../images/icon-large.png";
+import markerImageBasic from "../images/icon-large.png";
+import markerImageHotel from '../images/hotel-large.png';
+import markerImageTheater from '../images/theater-large.png';
+import markerImageBakery from '../images/bakery-large.png';
+import markerImageScenic from '../images/scenic-large.png';
+import markerImageRestro from '../images/food.png';
 import api from "./utils/api";
 
 export default class Map extends React.Component {
   state = {
     locations: [],
-    marker: undefined
+    markerImage: null
   };
 
   componentDidMount() {
@@ -19,6 +24,41 @@ export default class Map extends React.Component {
     });
   }
 
+
+  selectMarker(currentLocationType){
+      console.log(currentLocationType);
+   if(currentLocationType === "Hotel")
+   {
+       this.setState({
+           markerImage: markerImageHotel
+       })
+   }
+   else if(currentLocationType === "Theater"){
+    this.setState({
+           markerImage: markerImageTheater
+       })
+   }
+   else if(currentLocationType === "Bakery"){
+    this.setState({
+           markerImage: markerImageBakery
+       })
+   }
+   else if(currentLocationType === "Scenic Lookout"){
+    this.setState({
+           markerImage: markerImageScenic
+       })
+   }
+   else if(currentLocationType === "Coffee Shop" || "American Restaurant" || "Fast Food Restaurant"){
+    this.setState({
+           markerImage: markerImageRestro
+       })
+   }
+   else{
+       this.setState({
+           markerImage: markerImageBasic
+       })
+   }
+  }
   
 
   loadMap = () => {
@@ -216,7 +256,7 @@ export default class Map extends React.Component {
     ];
 
     var map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 19.076, lng: 72.8777 },
+      center: { lat: 19.0213, lng: 72.8424 },
       zoom: 12,
       styles: styles,
       disableDefaultUI: true
@@ -224,13 +264,16 @@ export default class Map extends React.Component {
     });
 
     this.state.locations.map(location => {
+      
+      this.selectMarker(location.venue.categories[0].name);
+
       var marker = new window.google.maps.Marker({
         position: {
           lat: location.venue.location.lat,
           lng: location.venue.location.lng
         },
         map: map,
-        icon: markerImage,
+        icon: this.state.markerImage,
         animation: window.google.maps.Animation.DROP,
         title: location.venue.name
       });

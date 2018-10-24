@@ -1,11 +1,27 @@
 import React from "react";
 import "../CSS/App.scss";
 import Header from "./Header";
+import './utils/api';
+import api from "./utils/api";
 
 export class Container extends React.Component {
+
+
+  state = {
+    locations: []
+  }
+
   componentDidMount() {
     this.loadMap();
+
+    api.discoverLocations().then(locations => {
+      this.setState({
+        locations
+      })
+    })
   }
+
+
 
   /* This function calls the load script function which will add the script tag to the html file which in turn will draw the map. */
   loadMap = () => {

@@ -205,6 +205,15 @@ export default class Map extends React.Component {
       styles: styles,
       disableDefaultUI: true
     });
+    
+    // const markerImage = "../images/marker.png ";
+    var marker = new window.google.maps.Marker({
+        position:{ lat: 19.076, lng: 72.8777 },
+        map: map,
+        // icon: markerImage,
+        animation: window.google.maps.Animation.DROP,
+        title: 'Hello World'
+    })
   };
 
   render() {

@@ -22,7 +22,7 @@ export class Container extends React.Component {
     return (
       <main>
         <Header />
-        <Map />
+        <Map  locations={this.state.locations} />
       </main>
     );
   }

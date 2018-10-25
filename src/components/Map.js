@@ -1,10 +1,10 @@
 import React from "react";
-import markerImageBasic from "../images/icon-large.png";
-import markerImageHotel from "../images/hotel-large.png";
-import markerImageTheater from "../images/theater-large.png";
-import markerImageBakery from "../images/bakery-large.png";
-import markerImageScenic from "../images/scenic-large.png";
-import markerImageRestro from "../images/food.png";
+import markerImageBasic from "../images/marker.png";
+import markerImageHotel from "../images/hotel-small.png";
+import markerImageTheater from "../images/theater.png";
+import markerImageBakery from "../images/bakery.png";
+import markerImageScenic from "../images/photo.png";
+import markerImageRestro from "../images/restro-small.png";
 import api from "./utils/api";
 
 import LocationList from "./LocationList";
@@ -164,7 +164,7 @@ export default class Map extends React.Component {
         lat: 19.0213,
         lng: 72.8424
       },
-      zoom: 12,
+      zoom: 11.7,
       styles: styles,
       disableDefaultUI: true
       //   gestureHandling: 'greedy'

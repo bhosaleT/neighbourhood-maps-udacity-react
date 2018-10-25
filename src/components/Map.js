@@ -6,28 +6,54 @@ import markerImageBakery from "../images/bakery-large.png";
 import markerImageScenic from "../images/scenic-large.png";
 import markerImageRestro from "../images/food.png";
 import api from "./utils/api";
-import LocationList from "./LocationList";
 import escapeRegExp from "escape-string-regexp";
-import sortBy from "sort-by";
+// import sortBy from "sort-by";
+// import LocationList from "./LocationList";
 
 export default class Map extends React.Component {
   state = {
     locations: [],
-    filterLocations: [],
-    markerImage: null
+    filteredLocations: [],
+    markerImage: null,
+    searchInput: ""
   };
 
   componentDidMount() {
     api.discoverLocations().then(locations => {
       this.setState(
         {
-          locations
+          locations: locations,
+          filteredLocations: locations
         },
         this.loadMap()
       );
     });
   }
 
+  handleChange = event => {
+    const query = event.target.value.trim();
+    this.setState({
+      searchInput: query
+    });
+
+    // console.log(this.state.locations);
+    // console.log(this.state.searchInput);
+
+    let showingLocations;
+    if (this.state.searchInput) {
+      const match = new RegExp(escapeRegExp(this.state.searchInput), "i");
+      showingLocations = this.state.locations.filter(location =>
+        match.test(location.venue.name)
+      );
+      this.setState({
+        filteredLocations: showingLocations
+      });
+    } else {
+      this.setState({
+        filteredLocations: this.state.locations
+      });
+    }
+  };
   selectMarker(currentLocationType) {
     console.log(currentLocationType);
     if (currentLocationType === "Hotel") {
@@ -73,197 +99,107 @@ export default class Map extends React.Component {
       {
         featureType: "water",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#d3d3d3"
-          }
-        ]
+        stylers: [{ color: "#d3d3d3" }]
       },
       {
         featureType: "transit",
-        stylers: [
-          {
-            color: "#808080"
-          },
-          {
-            visibility: "off"
-          }
-        ]
+        stylers: [{ color: "#808080" }, { visibility: "off" }]
       },
       {
         featureType: "road.highway",
         elementType: "geometry.stroke",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#b3b3b3"
-          }
-        ]
+        stylers: [{ visibility: "on" }, { color: "#b3b3b3" }]
       },
       {
         featureType: "road.highway",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#ffffff"
-          }
-        ]
+        stylers: [{ color: "#ffffff" }]
       },
       {
         featureType: "road.local",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#ffffff"
-          },
-          {
-            weight: 1.8
-          }
-        ]
+        stylers: [{ visibility: "on" }, { color: "#ffffff" }, { weight: 1.8 }]
       },
       {
         featureType: "road.local",
         elementType: "geometry.stroke",
-        stylers: [
-          {
-            color: "#d7d7d7"
-          }
-        ]
+        stylers: [{ color: "#d7d7d7" }]
       },
       {
         featureType: "poi",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#ebebeb"
-          }
-        ]
+        stylers: [{ visibility: "on" }, { color: "#ebebeb" }]
       },
       {
         featureType: "administrative",
         elementType: "geometry",
-        stylers: [
-          {
-            color: "#a7a7a7"
-          }
-        ]
+        stylers: [{ color: "#a7a7a7" }]
       },
       {
         featureType: "road.arterial",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#ffffff"
-          }
-        ]
+        stylers: [{ color: "#ffffff" }]
       },
       {
         featureType: "road.arterial",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#ffffff"
-          }
-        ]
+        stylers: [{ color: "#ffffff" }]
       },
       {
         featureType: "landscape",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#efefef"
-          }
-        ]
+        stylers: [{ visibility: "on" }, { color: "#efefef" }]
       },
       {
         featureType: "road",
         elementType: "labels.text.fill",
-        stylers: [
-          {
-            color: "#696969"
-          }
-        ]
+        stylers: [{ color: "#696969" }]
       },
       {
         featureType: "administrative",
         elementType: "labels.text.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#737373"
-          }
-        ]
+        stylers: [{ visibility: "on" }, { color: "#737373" }]
       },
       {
         featureType: "poi",
         elementType: "labels.icon",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
+        stylers: [{ visibility: "off" }]
       },
       {
         featureType: "poi",
         elementType: "labels",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
+        stylers: [{ visibility: "off" }]
       },
       {
         featureType: "road.arterial",
         elementType: "geometry.stroke",
-        stylers: [
-          {
-            color: "#d6d6d6"
-          }
-        ]
+        stylers: [{ color: "#d6d6d6" }]
       },
       {
         featureType: "road",
         elementType: "labels.icon",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
+        stylers: [{ visibility: "off" }]
       },
       {},
       {
         featureType: "poi",
         elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#dadada"
-          }
-        ]
+        stylers: [{ color: "#dadada" }]
       }
     ];
 
     var map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 19.0213, lng: 72.8424 },
+      center: {
+        lat: 19.0213,
+        lng: 72.8424
+      },
       zoom: 12,
       styles: styles,
       disableDefaultUI: true
       //   gestureHandling: 'greedy'
     });
 
-    this.state.locations.map(location => {
+    this.state.filteredLocations.map(location => {
       this.selectMarker(location.venue.categories[0].name);
 
       var marker = new window.google.maps.Marker({
@@ -283,10 +219,23 @@ export default class Map extends React.Component {
   render() {
     return (
       <div className="body-content">
-        <LocationList
-          className="body-content__list"
-          locations={this.state.locations}
-        />
+        <div className="location-list">
+          <input
+            className="location-list__input"
+            placeholder="Search Location"
+            onChange={this.handleChange}
+            value={this.state.searchInput}
+            type="text"
+          />
+          <ul>
+            {this.state.filteredLocations.map(location => (
+              <li className="location-list__item" key={location.venue.name}>
+                {location.venue.name}
+              </li>
+            ))}
+          </ul>
+          <div className="legal">&copy;2018 by Tejas Bhosale.</div>
+        </div>
         <div className="body-content__map" id="map" />
       </div>
     );

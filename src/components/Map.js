@@ -7,7 +7,6 @@ import markerImageScenic from "../images/scenic-large.png";
 import markerImageRestro from "../images/food.png";
 import api from "./utils/api";
 
-// import sortBy from "sort-by";
 import LocationList from "./LocationList";
 
 export default class Map extends React.Component {

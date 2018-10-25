@@ -1,10 +1,21 @@
 import React from "react";
+import api from './utils/api';
 
 export default class LocationList extends React.Component {
   state = {
     searchInput: "",
     locations: []
   };
+
+  componentWillMount(){
+    api.discoverLocations().then(locations => {
+      this.setState(
+        {
+          locations: locations
+        },
+      );
+    });
+  }
 
   handleChange = event => {
       

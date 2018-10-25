@@ -7,8 +7,7 @@ export default {
             client_id: "KMDK0FOEEB5PV5MJSBM0L2IWM5TP0G45415PQZT1SWOMLBXA",
             client_secret: "NW5R1KYT0OUMOKZ1H3M0KYQTA5JRYBAX4GENMV3XBX3GTQFK",
             near: "Mumbai",
-            limit: "10",
-            venuPhotos:"1",
+            limit: "12",
             v:"20181020" 
         }
 

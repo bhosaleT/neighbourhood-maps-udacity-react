@@ -7,10 +7,13 @@ import markerImageScenic from "../images/scenic-large.png";
 import markerImageRestro from "../images/food.png";
 import api from "./utils/api";
 import LocationList from "./LocationList";
+import escapeRegExp from "escape-string-regexp";
+import sortBy from "sort-by";
 
 export default class Map extends React.Component {
   state = {
     locations: [],
+    filterLocations: [],
     markerImage: null
   };
 
@@ -57,10 +60,6 @@ export default class Map extends React.Component {
       });
     }
   }
-
-  filterLocations = searchInput => {
-    console.log(searchInput);
-  };
 
   loadMap = () => {
     loadScript(
@@ -286,7 +285,6 @@ export default class Map extends React.Component {
       <div className="body-content">
         <LocationList
           className="body-content__list"
-          filterLocations={this.filterLocations}
           locations={this.state.locations}
         />
         <div className="body-content__map" id="map" />

@@ -6,56 +6,28 @@ import markerImageBakery from "../images/bakery-large.png";
 import markerImageScenic from "../images/scenic-large.png";
 import markerImageRestro from "../images/food.png";
 import api from "./utils/api";
-import escapeRegExp from "escape-string-regexp";
+
 // import sortBy from "sort-by";
-// import LocationList from "./LocationList";
+import LocationList from "./LocationList";
 
 export default class Map extends React.Component {
   state = {
     locations: [],
-    filteredLocations: [],
-    markerImage: null,
-    searchInput: ""
+    markerImage: null
   };
 
   componentDidMount() {
     api.discoverLocations().then(locations => {
       this.setState(
         {
-          locations: locations,
-          filteredLocations: locations
+          locations: locations
         },
         this.loadMap()
       );
     });
   }
 
-  handleChange = event => {
-    const query = event.target.value.trim();
-    this.setState({
-      searchInput: query
-    });
-
-    // console.log(this.state.locations);
-    // console.log(this.state.searchInput);
-
-    let showingLocations;
-    if (this.state.searchInput) {
-      const match = new RegExp(escapeRegExp(this.state.searchInput), "i");
-      showingLocations = this.state.locations.filter(location =>
-        match.test(location.venue.name)
-      );
-      this.setState({
-        filteredLocations: showingLocations
-      });
-    } else {
-      this.setState({
-        filteredLocations: this.state.locations
-      });
-    }
-  };
   selectMarker(currentLocationType) {
-    console.log(currentLocationType);
     if (currentLocationType === "Hotel") {
       this.setState({
         markerImage: markerImageHotel
@@ -199,9 +171,9 @@ export default class Map extends React.Component {
       //   gestureHandling: 'greedy'
     });
 
-    this.state.filteredLocations.map(location => {
+    var allLocations = [];
+    this.state.locations.forEach(location => {
       this.selectMarker(location.venue.categories[0].name);
-
       var marker = new window.google.maps.Marker({
         position: {
           lat: location.venue.location.lat,
@@ -212,30 +184,22 @@ export default class Map extends React.Component {
         animation: window.google.maps.Animation.DROP,
         title: location.venue.name
       });
-      return marker;
+      location.marker = marker;
+      location.display = true;
+      allLocations.push(location);
+    });
+
+    this.setState({
+      locations: allLocations
     });
   };
 
   render() {
     return (
       <div className="body-content">
-        <div className="location-list">
-          <input
-            className="location-list__input"
-            placeholder="Search Location"
-            onChange={this.handleChange}
-            value={this.state.searchInput}
-            type="text"
-          />
-          <ul>
-            {this.state.filteredLocations.map(location => (
-              <li className="location-list__item" key={location.venue.name}>
-                {location.venue.name}
-              </li>
-            ))}
-          </ul>
-          <div className="legal">&copy;2018 by Tejas Bhosale.</div>
-        </div>
+        <LocationList
+          allLocations={this.state.locations}
+        />
         <div className="body-content__map" id="map" />
       </div>
     );

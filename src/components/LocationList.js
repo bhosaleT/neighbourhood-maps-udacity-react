@@ -2,20 +2,20 @@ import React from "react";
 
 export default class LocationList extends React.Component {
   state = {
-      searchInput: ''
-  }
+    searchInput: ""
+  };
 
-  handleChange = (event) => {
-      this.setState({
-          searchInput: event.target.value.trim()
-      })
-      this.props.filterLocations(this.state.searchInput);
-  }
+  handleChange = event => {
+    const query = event.target.value;
+    this.setState({
+      searchInput: query
+    });
+    this.props.filterLocations(this.state.searchInput);
+  };
 
   render() {
     return (
       <div className="location-list">
-     
         <input
           className="location-list__input"
           placeholder="Search Location"

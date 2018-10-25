@@ -38,17 +38,43 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: end;
 
   &__item {
     font-size: 1.8rem;
     padding: 1rem 1rem 1rem 1rem;
     color: white;
     list-style: none;
+    // margin-top: 1rem;
+  }
+
+  &__input {
+    padding: 1rem 2rem;
+    border-radius: 2px;
+    // background-color: rgba(white, .5);
+    font-size: 1.5rem;
+    font-family: inherit;
+    border: none;
+    color: inherit;
+    margin-bottom: 4rem;
+    border-bottom: 3px solid transparent;
+    // width: 100%;
+    display: block;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 1rem 2rem rgba(#fff, 0.1);
+      border-bottom: 3px solid $color-grey-dark;
+    }
+
+    &::-webkit-input-placeholder {
+      color: $color-grey-dark;
+    }
   }
 }
 
 .legal {
+  margin-top: 35rem;
   font-size: 1.8rem;
   padding: 1rem;
   color: white;

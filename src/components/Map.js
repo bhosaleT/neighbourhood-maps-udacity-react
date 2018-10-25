@@ -58,6 +58,10 @@ export default class Map extends React.Component {
     }
   }
 
+  filterLocations = searchInput => {
+    console.log(searchInput);
+  };
+
   loadMap = () => {
     loadScript(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyCgByDyHejXcnEYiAohk2kMYN0npMXsJTc&callback=initMap"
@@ -280,7 +284,11 @@ export default class Map extends React.Component {
   render() {
     return (
       <div className="body-content">
-        <LocationList className="body-content__list"  locations = {this.state.locations}/>
+        <LocationList
+          className="body-content__list"
+          filterLocations={this.filterLocations}
+          locations={this.state.locations}
+        />
         <div className="body-content__map" id="map" />
       </div>
     );

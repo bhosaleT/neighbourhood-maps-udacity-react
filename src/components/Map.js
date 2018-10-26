@@ -12,12 +12,15 @@ import LocationList from "./LocationList";
 export default class Map extends React.Component {
   state = {
     locations: [],
-    markerImage: null
+    markerImage: null,
+    map: "",
+    infowindow: ""
   };
 
   componentDidMount() {
     api.discoverLocations().then(locations => {
-      this.setState({
+      this.setState(
+        {
           locations: locations
         },
         this.loadMap()
@@ -65,145 +68,191 @@ export default class Map extends React.Component {
   };
 
   initMap = () => {
-    var styles = [{
+    var self = this;
+
+    var styles = [
+      {
         featureType: "water",
         elementType: "geometry.fill",
-        stylers: [{
-          color: "#d3d3d3"
-        }]
+        stylers: [
+          {
+            color: "#d3d3d3"
+          }
+        ]
       },
       {
         featureType: "transit",
-        stylers: [{
-          color: "#808080"
-        }, {
-          visibility: "off"
-        }]
+        stylers: [
+          {
+            color: "#808080"
+          },
+          {
+            visibility: "off"
+          }
+        ]
       },
       {
         featureType: "road.highway",
         elementType: "geometry.stroke",
-        stylers: [{
-          visibility: "on"
-        }, {
-          color: "#b3b3b3"
-        }]
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            color: "#b3b3b3"
+          }
+        ]
       },
       {
         featureType: "road.highway",
         elementType: "geometry.fill",
-        stylers: [{
-          color: "#ffffff"
-        }]
+        stylers: [
+          {
+            color: "#ffffff"
+          }
+        ]
       },
       {
         featureType: "road.local",
         elementType: "geometry.fill",
-        stylers: [{
-          visibility: "on"
-        }, {
-          color: "#ffffff"
-        }, {
-          weight: 1.8
-        }]
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            color: "#ffffff"
+          },
+          {
+            weight: 1.8
+          }
+        ]
       },
       {
         featureType: "road.local",
         elementType: "geometry.stroke",
-        stylers: [{
-          color: "#d7d7d7"
-        }]
+        stylers: [
+          {
+            color: "#d7d7d7"
+          }
+        ]
       },
       {
         featureType: "poi",
         elementType: "geometry.fill",
-        stylers: [{
-          visibility: "on"
-        }, {
-          color: "#ebebeb"
-        }]
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            color: "#ebebeb"
+          }
+        ]
       },
       {
         featureType: "administrative",
         elementType: "geometry",
-        stylers: [{
-          color: "#a7a7a7"
-        }]
+        stylers: [
+          {
+            color: "#a7a7a7"
+          }
+        ]
       },
       {
         featureType: "road.arterial",
         elementType: "geometry.fill",
-        stylers: [{
-          color: "#ffffff"
-        }]
+        stylers: [
+          {
+            color: "#ffffff"
+          }
+        ]
       },
       {
         featureType: "road.arterial",
         elementType: "geometry.fill",
-        stylers: [{
-          color: "#ffffff"
-        }]
+        stylers: [
+          {
+            color: "#ffffff"
+          }
+        ]
       },
       {
         featureType: "landscape",
         elementType: "geometry.fill",
-        stylers: [{
-          visibility: "on"
-        }, {
-          color: "#efefef"
-        }]
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            color: "#efefef"
+          }
+        ]
       },
       {
         featureType: "road",
         elementType: "labels.text.fill",
-        stylers: [{
-          color: "#696969"
-        }]
+        stylers: [
+          {
+            color: "#696969"
+          }
+        ]
       },
       {
         featureType: "administrative",
         elementType: "labels.text.fill",
-        stylers: [{
-          visibility: "on"
-        }, {
-          color: "#737373"
-        }]
+        stylers: [
+          {
+            visibility: "on"
+          },
+          {
+            color: "#737373"
+          }
+        ]
       },
       {
         featureType: "poi",
         elementType: "labels.icon",
-        stylers: [{
-          visibility: "off"
-        }]
+        stylers: [
+          {
+            visibility: "off"
+          }
+        ]
       },
       {
         featureType: "poi",
         elementType: "labels",
-        stylers: [{
-          visibility: "off"
-        }]
+        stylers: [
+          {
+            visibility: "off"
+          }
+        ]
       },
       {
         featureType: "road.arterial",
         elementType: "geometry.stroke",
-        stylers: [{
-          color: "#d6d6d6"
-        }]
+        stylers: [
+          {
+            color: "#d6d6d6"
+          }
+        ]
       },
       {
         featureType: "road",
         elementType: "labels.icon",
-        stylers: [{
-          visibility: "off"
-        }]
+        stylers: [
+          {
+            visibility: "off"
+          }
+        ]
       },
       {},
       {
         featureType: "poi",
         elementType: "geometry.fill",
-        stylers: [{
-          color: "#dadada"
-        }]
+        stylers: [
+          {
+            color: "#dadada"
+          }
+        ]
       }
     ];
 
@@ -212,15 +261,23 @@ export default class Map extends React.Component {
         lat: 19.0213,
         lng: 72.8424
       },
-      zoom: 11.7,
+      zoom: 12,
       styles: styles,
-      disableDefaultUI: true
-      //   gestureHandling: 'greedy'
+      disableDefaultUI: true,
+      // gestureHandling: "greedy",
+      mapTypeControl: false
     });
 
-    var infowindow = new window.google.maps.InfoWindow({
+    window.google.maps.event.addListener(map, "click", function() {
+      self.closeInfoWindow();
+    });
 
-    })
+    var infowindow = new window.google.maps.InfoWindow({});
+
+    this.setState({
+      map: map,
+      infowindow: infowindow
+    });
 
     var allLocations = [];
     this.state.locations.forEach(location => {
@@ -229,14 +286,18 @@ export default class Map extends React.Component {
       var contentTab = `<div class="window">
                         <h2 class="window__heading">${location.venue.name}</h2>
                         <div class="window__info">
-                        <p class="window__summary"><q>${location.reasons.items[0].summary}</q></p>
-                        <p class="window__address">${location.venue.location.address}</p>
-                        <p class="window__location">${location.venue.location.city}, ${location.venue.location.country}</p>
+                        <p class="window__summary"><q>${
+                          location.reasons.items[0].summary
+                        }</q></p>
+                        <p class="window__address">${
+                          location.venue.location.address
+                        }</p>
+                        <p class="window__location">${
+                          location.venue.location.city
+                        }, ${location.venue.location.country}</p>
                         </div>
                         </div>
-      `
-
-
+      `;
 
       var marker = new window.google.maps.Marker({
         position: {
@@ -251,11 +312,9 @@ export default class Map extends React.Component {
       location.marker = marker;
       location.display = true;
 
-      marker.addListener('click', function () {
-
-        infowindow.setContent(contentTab);
-        infowindow.open(map, marker);
-      })
+      marker.addListener("click", function() {
+        self.openInfoWindow(marker, contentTab);
+      });
 
       allLocations.push(location);
     });
@@ -265,18 +324,21 @@ export default class Map extends React.Component {
     });
   };
 
+  openInfoWindow(marker, contentTab) {
+    this.state.infowindow.setContent(contentTab);
+    this.state.infowindow.open(this.state.map, marker);
+  }
+
+  closeInfoWindow() {
+    this.state.infowindow.close();
+  }
+
   render() {
-    return ( <
-      div className = "body-content" >
-      <
-      LocationList allLocations = {
-        this.state.locations
-      }
-      /> <
-      div className = "body-content__map"
-      id = "map" / >
-      <
-      /div>
+    return (
+      <div className="body-content">
+        <LocationList allLocations={this.state.locations} />{" "}
+        <div className="body-content__map" id="map" />
+      </div>
     );
   }
 }

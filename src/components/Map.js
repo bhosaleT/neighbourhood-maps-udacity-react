@@ -72,189 +72,88 @@ export default class Map extends React.Component {
 
     var styles = [
       {
-        featureType: "water",
-        elementType: "geometry.fill",
-        stylers: [
+        "featureType": "landscape",
+        "elementType": "labels",
+        "stylers": [
           {
-            color: "#d3d3d3"
+            "visibility": "off"
           }
         ]
       },
       {
-        featureType: "transit",
-        stylers: [
+        "featureType": "transit",
+        "elementType": "labels",
+        "stylers": [
           {
-            color: "#808080"
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.icon",
+        "stylers": [
+          {
+            "visibility": "off"
+          }
+        ]
+      },
+      {
+        "stylers": [
+          {
+            "hue": "#00aaff"
           },
           {
-            visibility: "off"
-          }
-        ]
-      },
-      {
-        featureType: "road.highway",
-        elementType: "geometry.stroke",
-        stylers: [
-          {
-            visibility: "on"
+            "saturation": -100
           },
           {
-            color: "#b3b3b3"
-          }
-        ]
-      },
-      {
-        featureType: "road.highway",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#ffffff"
-          }
-        ]
-      },
-      {
-        featureType: "road.local",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            visibility: "on"
+            "gamma": 2.15
           },
           {
-            color: "#ffffff"
+            "lightness": 12
+          }
+        ]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [
+          {
+            "visibility": "on"
           },
           {
-            weight: 1.8
+            "lightness": 24
           }
         ]
       },
       {
-        featureType: "road.local",
-        elementType: "geometry.stroke",
-        stylers: [
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [
           {
-            color: "#d7d7d7"
-          }
-        ]
-      },
-      {
-        featureType: "poi",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#ebebeb"
-          }
-        ]
-      },
-      {
-        featureType: "administrative",
-        elementType: "geometry",
-        stylers: [
-          {
-            color: "#a7a7a7"
-          }
-        ]
-      },
-      {
-        featureType: "road.arterial",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#ffffff"
-          }
-        ]
-      },
-      {
-        featureType: "road.arterial",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#ffffff"
-          }
-        ]
-      },
-      {
-        featureType: "landscape",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#efefef"
-          }
-        ]
-      },
-      {
-        featureType: "road",
-        elementType: "labels.text.fill",
-        stylers: [
-          {
-            color: "#696969"
-          }
-        ]
-      },
-      {
-        featureType: "administrative",
-        elementType: "labels.text.fill",
-        stylers: [
-          {
-            visibility: "on"
-          },
-          {
-            color: "#737373"
-          }
-        ]
-      },
-      {
-        featureType: "poi",
-        elementType: "labels.icon",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
-      },
-      {
-        featureType: "poi",
-        elementType: "labels",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
-      },
-      {
-        featureType: "road.arterial",
-        elementType: "geometry.stroke",
-        stylers: [
-          {
-            color: "#d6d6d6"
-          }
-        ]
-      },
-      {
-        featureType: "road",
-        elementType: "labels.icon",
-        stylers: [
-          {
-            visibility: "off"
-          }
-        ]
-      },
-      {},
-      {
-        featureType: "poi",
-        elementType: "geometry.fill",
-        stylers: [
-          {
-            color: "#dadada"
+            "lightness": 57
           }
         ]
       }
-    ];
+    ]
 
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: {

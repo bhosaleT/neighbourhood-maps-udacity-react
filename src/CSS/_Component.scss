@@ -47,10 +47,11 @@
   // justify-content: space-between;
 
   &__item {
-    font-size: 1.8rem;
-    padding: 1rem 1rem 1rem 1rem;
+    font-size: 1.6rem;
+    padding: 1rem 1rem;
     color: white;
     list-style: none;
+    word-wrap: break-word
     // margin-top: 1rem;
   }
 
@@ -85,4 +86,35 @@
   padding: 1rem;
   color: white;
   text-align: left;
+}
+
+// INFO WINDOW
+.window{
+  font-size: 1.4rem;
+  &__heading{
+    width: 100%;
+    text-align: center;
+    background: #272727;
+    color: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.7);
+    margin: 0;
+  
+  }
+
+  &__info{
+    background: #eeeeee;
+    padding: 0.4rem  1rem;
+    text-align: center;
+  }
+  
+  &__summary{
+    font-style: italic;
+  }
+
+  &__address{
+    font-weight: bold;
+  }
+  &__location{
+    font-weight: bold;
+  }
 }

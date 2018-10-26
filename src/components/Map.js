@@ -313,7 +313,7 @@ export default class Map extends React.Component {
       location.display = true;
 
       marker.addListener("click", function() {
-        self.openInfoWindow(marker, contentTab);
+        self.openInfoWindow(location, contentTab);
       });
 
       allLocations.push(location);
@@ -324,9 +324,9 @@ export default class Map extends React.Component {
     });
   };
 
-  openInfoWindow(marker, contentTab) {
+  openInfoWindow(location, contentTab) {
     this.state.infowindow.setContent(contentTab);
-    this.state.infowindow.open(this.state.map, marker);
+    this.state.infowindow.open(this.state.map, location.marker);
   }
 
   closeInfoWindow() {

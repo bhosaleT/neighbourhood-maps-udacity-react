@@ -237,11 +237,11 @@ export default class Map extends React.Component {
       }
       var prefix = response.bestPhoto.prefix;
       var suffix = response.bestPhoto.suffix;
-      var imgSrc = `${prefix}150x100${suffix}`;
-      var reply = `<div class="info-tab">
+      var imgSrc = `${prefix}200x200${suffix}`;
+      var reply = `<div id="google-popup">
       <h3>${response.name}</h3>
       <img src=${imgSrc}>
-      <a href=${response.canonicalUrl}>visit ${response.name} on Foursquare </a>
+      <a href=${response.canonicalUrl}>Visti ${response.name} on foursquare </a>
       <p>${response.location.formattedAddress}</p>
       <p>${number}</p>
       <p>Rating: ${response.rating} </p>

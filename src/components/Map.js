@@ -167,7 +167,7 @@ export default class Map extends React.Component {
         lat: 19.0,
         lng: 72.8424
       },
-      zoom: 13,
+      zoom: 12.5,
       styles: styles,
       disableDefaultUI: true,
       // gestureHandling: "greedy",

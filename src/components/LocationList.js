@@ -10,7 +10,7 @@ export default class LocationList extends React.Component {
   state = {
     searchInput: "",
     locations: [],
-    showingOptions: true
+    showingOptions: false
   };
 
   handleChange = event => {
@@ -35,17 +35,27 @@ export default class LocationList extends React.Component {
     this.setState({
       showingOptions: !this.state.showingOptions,
       locations: this.props.allLocations
-    });
+    }, this.showSideBar);
+    
+    // sideBar.style.display === "none"
+    //   ? (sideBar.style.display = "block")
+    //   : (sideBar.style.display = "none");
+    
+  }
+  
+  showSideBar(){
     const sideBar = document.querySelector(".location-list");
-    sideBar.style.display === "none"
-      ? (sideBar.style.display = "block")
-      : (sideBar.style.display = "none");
+    if(this.state.showingOptions === true){
+      sideBar.style.display = "block"
+     }else{
+       sideBar.style.display ="none"
+     }
   }
 
   render() {
     return <div className="list">
         <button className="button" onClick={this.showOptions}>
-          {this.state.showingOptions ? "Show Options " : "Hide Options"}
+          {this.state.showingOptions ? "Hide Options " : "Show Options"}
         </button>
         <div className="location-list">
           <input className="location-list__input" placeholder="Search Location" onChange={this.handleChange} value={this.state.searchInput} type="text" />
@@ -60,7 +70,6 @@ export default class LocationList extends React.Component {
               </li>
             ))}
           </ul>
-          <div className="legal">&copy;2018 Tejas Bhosale</div>
         </div>
       </div>;
   }

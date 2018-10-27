@@ -10,6 +10,13 @@ import api from "./utils/api";
 import LocationList from "./LocationList";
 
 export default class Map extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.closeInfoWindow = this.closeInfoWindow.bind(this);
+    this.openInfoWindow = this.openInfoWindow.bind(this);
+    this.initMap = this.initMap.bind(this);
+  }
   state = {
     locations: [],
     markerImage: null,
@@ -72,95 +79,95 @@ export default class Map extends React.Component {
 
     var styles = [
       {
-        "featureType": "landscape",
-        "elementType": "labels",
-        "stylers": [
+        featureType: "landscape",
+        elementType: "labels",
+        stylers: [
           {
-            "visibility": "off"
+            visibility: "off"
           }
         ]
       },
       {
-        "featureType": "transit",
-        "elementType": "labels",
-        "stylers": [
+        featureType: "transit",
+        elementType: "labels",
+        stylers: [
           {
-            "visibility": "off"
+            visibility: "off"
           }
         ]
       },
       {
-        "featureType": "poi",
-        "elementType": "labels",
-        "stylers": [
+        featureType: "poi",
+        elementType: "labels",
+        stylers: [
           {
-            "visibility": "off"
+            visibility: "off"
           }
         ]
       },
       {
-        "featureType": "water",
-        "elementType": "labels",
-        "stylers": [
+        featureType: "water",
+        elementType: "labels",
+        stylers: [
           {
-            "visibility": "off"
+            visibility: "off"
           }
         ]
       },
       {
-        "featureType": "road",
-        "elementType": "labels.icon",
-        "stylers": [
+        featureType: "road",
+        elementType: "labels.icon",
+        stylers: [
           {
-            "visibility": "off"
+            visibility: "off"
           }
         ]
       },
       {
-        "stylers": [
+        stylers: [
           {
-            "hue": "#00aaff"
+            hue: "#00aaff"
           },
           {
-            "saturation": -100
+            saturation: -100
           },
           {
-            "gamma": 2.15
+            gamma: 2.15
           },
           {
-            "lightness": 12
+            lightness: 12
           }
         ]
       },
       {
-        "featureType": "road",
-        "elementType": "labels.text.fill",
-        "stylers": [
+        featureType: "road",
+        elementType: "labels.text.fill",
+        stylers: [
           {
-            "visibility": "on"
+            visibility: "on"
           },
           {
-            "lightness": 24
+            lightness: 24
           }
         ]
       },
       {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
+        featureType: "road",
+        elementType: "geometry",
+        stylers: [
           {
-            "lightness": 57
+            lightness: 57
           }
         ]
       }
-    ]
+    ];
 
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: {
         lat: 19.0213,
         lng: 72.8424
       },
-      zoom: 12,
+      zoom: 13,
       styles: styles,
       disableDefaultUI: true,
       // gestureHandling: "greedy",
@@ -182,22 +189,6 @@ export default class Map extends React.Component {
     this.state.locations.forEach(location => {
       this.selectMarker(location.venue.categories[0].name);
 
-      var contentTab = `<div class="window">
-                        <h2 class="window__heading">${location.venue.name}</h2>
-                        <div class="window__info">
-                        <p class="window__summary"><q>${
-                          location.reasons.items[0].summary
-                        }</q></p>
-                        <p class="window__address">${
-                          location.venue.location.address
-                        }</p>
-                        <p class="window__location">${
-                          location.venue.location.city
-                        }, ${location.venue.location.country}</p>
-                        </div>
-                        </div>
-      `;
-
       var marker = new window.google.maps.Marker({
         position: {
           lat: location.venue.location.lat,
@@ -212,7 +203,7 @@ export default class Map extends React.Component {
       location.display = true;
 
       marker.addListener("click", function() {
-        self.openInfoWindow(location, contentTab);
+        self.openInfoWindow(location);
       });
 
       allLocations.push(location);
@@ -223,19 +214,34 @@ export default class Map extends React.Component {
     });
   };
 
-  openInfoWindow(location, contentTab) {
-    this.state.infowindow.setContent(contentTab);
+  openInfoWindow(location) {
+    this.closeInfoWindow();
     this.state.infowindow.open(this.state.map, location.marker);
+    this.state.infowindow.setContent("Looking Up . . . ");
+    this.getWindowData(location);
   }
 
   closeInfoWindow() {
     this.state.infowindow.close();
   }
 
+  getWindowData(location) {
+    var self = this;
+    var venueId = location.venue.id;
+    api.getLocationDetails(venueId).then(response => {
+      var reply = response;
+      self.state.infowindow.setContent(reply);
+    });
+  }
+
   render() {
     return (
       <div className="body-content">
-        <LocationList allLocations={this.state.locations} />{" "}
+        <LocationList
+          closeInfoWindow={this.closeInfoWindow}
+          openInfoWindow={this.openInfoWindow}
+          allLocations={this.state.locations}
+        />{" "}
         <div className="body-content__map" id="map" />
       </div>
     );

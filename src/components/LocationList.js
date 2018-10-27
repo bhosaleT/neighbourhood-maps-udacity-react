@@ -1,5 +1,5 @@
 import React from "react";
-import api from './utils/api';
+import api from "./utils/api";
 
 export default class LocationList extends React.Component {
   state = {
@@ -7,18 +7,7 @@ export default class LocationList extends React.Component {
     locations: []
   };
 
-  componentWillMount(){
-    api.discoverLocations().then(locations => {
-      this.setState(
-        {
-          locations: locations
-        },
-      );
-    });
-  }
-
   handleChange = event => {
-      
     const query = event.target.value.trim();
 
     let showingLocations = [];
@@ -37,6 +26,14 @@ export default class LocationList extends React.Component {
     });
   };
 
+  componentWillMount() {
+    api.discoverLocations().then(locations => {
+      this.setState({
+        locations: locations
+      });
+    });
+  }
+
   render() {
     return (
       <div className="location-list">
@@ -49,7 +46,11 @@ export default class LocationList extends React.Component {
         />
         <ul>
           {this.state.locations.map(location => (
-            <li className="location-list__item" key={location.venue.name}>
+            <li
+              onClick={this.props.openInfoWindow.bind(this, location)}
+              className="location-list__item"
+              key={location.venue.name}
+            >
               {location.venue.name}
             </li>
           ))}

@@ -4,8 +4,8 @@ export default {
   discoverLocations() {
     const discoverURL = "https://api.foursquare.com/v2/venues/explore?";
     const discoverParams = {
-      client_id: "KMDK0FOEEB5PV5MJSBM0L2IWM5TP0G45415PQZT1SWOMLBXA",
-      client_secret: "5HN5WGHUHAMYR5EPUD3G3XPNBAQ0FJITLHRWJI3DPFWO4DCK",
+      client_id: "1LRTD1LJXLOI2LCU4FCEVD5RVNJB3MY4OUKRGXYKUYDTR501",
+      client_secret: "5JRAY0SYRZMPSVXTDLW0OHUIVW4MB0GKXF25SA22LCKTMZ0S",
       near: "Mumbai",
       limit: "15",
       v: "20181020"
@@ -24,8 +24,8 @@ export default {
   getLocationDetails(venueId) {
     const locationDetailsURL = `https://api.foursquare.com/v2/venues/${venueId}?`;
     const detailsParams = {
-      client_id: "KMDK0FOEEB5PV5MJSBM0L2IWM5TP0G45415PQZT1SWOMLBXA",
-      client_secret: "5HN5WGHUHAMYR5EPUD3G3XPNBAQ0FJITLHRWJI3DPFWO4DCK",
+      client_id: "1LRTD1LJXLOI2LCU4FCEVD5RVNJB3MY4OUKRGXYKUYDTR501",
+      client_secret: "5JRAY0SYRZMPSVXTDLW0OHUIVW4MB0GKXF25SA22LCKTMZ0S",
       v: "20181027",
       limit: "1"
     };

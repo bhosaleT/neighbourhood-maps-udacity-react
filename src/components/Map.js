@@ -229,18 +229,40 @@ export default class Map extends React.Component {
     var self = this;
     var venueId = location.venue.id;
     api.getLocationDetails(venueId).then(response => {
-      var reply = response;
+      var number;
+      if (response.contact.formattedPhone !== undefined) {
+        number = response.contact.formattedPhone;
+      } else {
+        number = "Number not provided";
+      }
+      var prefix = response.bestPhoto.prefix;
+      var suffix = response.bestPhoto.suffix;
+      var imgSrc = `${prefix}150x100${suffix}`;
+      var reply = `<div class="info-tab">
+      <h3>${response.name}</h3>
+      <img src=${imgSrc}>
+      <a href=${response.canonicalUrl}>visit ${response.name} on Foursquare </a>
+      <p>${response.location.formattedAddress}</p>
+      <p>${number}</p>
+      <p>Rating: ${response.rating} </p>
+      </div>`;
       self.state.infowindow.setContent(reply);
     });
   }
 
   render() {
-    return <div className="body-content">
-        <LocationList closeInfoWindow={this.closeInfoWindow} openInfoWindow={this.openInfoWindow} allLocations={this.state.locations} />
+    return (
+      <div className="body-content">
+        <LocationList
+          closeInfoWindow={this.closeInfoWindow}
+          openInfoWindow={this.openInfoWindow}
+          allLocations={this.state.locations}
+        />{" "}
         <div className="map-container">
           <div className="body-content__map" id="map" />
-        </div>
-      </div>;
+        </div>{" "}
+      </div>
+    );
   }
 }
 

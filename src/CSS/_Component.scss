@@ -136,3 +136,9 @@ body {
   outline: none;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
 }
+
+.info-tab{
+  display: flex;
+  flex-direction: column;
+  font-size: 2rem;
+}

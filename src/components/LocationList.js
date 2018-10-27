@@ -10,7 +10,7 @@ export default class LocationList extends React.Component {
   state = {
     searchInput: "",
     locations: [],
-    showingOptions: false
+    showingOptions: true
   };
 
   handleChange = event => {
@@ -43,19 +43,12 @@ export default class LocationList extends React.Component {
   }
 
   render() {
-    return (
-      <div className="list">
+    return <div className="list">
         <button className="button" onClick={this.showOptions}>
-          {this.state.showingOptions ? "Hide Options " : "Show Options"}
+          {this.state.showingOptions ? "Show Options " : "Hide Options"}
         </button>
         <div className="location-list">
-          <input
-            className="location-list__input"
-            placeholder="Search Location"
-            onChange={this.handleChange}
-            value={this.state.searchInput}
-            type="text"
-          />
+          <input className="location-list__input" placeholder="Search Location" onChange={this.handleChange} value={this.state.searchInput} type="text" />
           <ul>
             {this.state.locations.map(location => (
               <li
@@ -67,8 +60,8 @@ export default class LocationList extends React.Component {
               </li>
             ))}
           </ul>
+          <div className="legal">&copy;2018 Tejas Bhosale</div>
         </div>
-      </div>
-    );
+      </div>;
   }
 }

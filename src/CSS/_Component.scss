@@ -11,6 +11,9 @@ body {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
 }
 
 .header {
@@ -55,6 +58,7 @@ body {
   left: 0;
   display: none;
   position: fixed;
+  height: 750px;
 
   &__item {
     font-size: 1.6rem;
@@ -75,7 +79,7 @@ body {
     color: inherit;
     margin-bottom: 2rem;
     border-bottom: 3px solid transparent;
-    // width: 100%;
+    width: 100%;
     display: block;
 
     &:focus {
@@ -86,16 +90,17 @@ body {
 
     &::-webkit-input-placeholder {
       color: $color-grey-dark;
+      padding: 1rem 0.5rem;
     }
   }
 }
 
 .legal {
-  margin-top: 10rem;
+  margin-top: 3rem;
   font-size: 1.8rem;
   padding: 1rem;
   color: white;
-  text-align: left;
+  // text-align: center;
 }
 
 /*  BUTTON */

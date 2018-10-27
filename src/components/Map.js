@@ -164,7 +164,7 @@ export default class Map extends React.Component {
 
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: {
-        lat: 19.0213,
+        lat: 19.0,
         lng: 72.8424
       },
       zoom: 13,
@@ -238,10 +238,11 @@ export default class Map extends React.Component {
     return (
       <div className="body-content">
         <LocationList
+          className="location-list"
           closeInfoWindow={this.closeInfoWindow}
           openInfoWindow={this.openInfoWindow}
           allLocations={this.state.locations}
-        />{" "}
+        />
         <div className="body-content__map" id="map" />
       </div>
     );

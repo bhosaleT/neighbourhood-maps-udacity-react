@@ -7,7 +7,7 @@ export default {
       client_id: "KMDK0FOEEB5PV5MJSBM0L2IWM5TP0G45415PQZT1SWOMLBXA",
       client_secret: "5HN5WGHUHAMYR5EPUD3G3XPNBAQ0FJITLHRWJI3DPFWO4DCK",
       near: "Mumbai",
-      limit: "12",
+      limit: "15",
       v: "20181020"
     };
 

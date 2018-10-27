@@ -14,7 +14,7 @@
     justify-content: center;
     align-items: center;
   }
-  &__icon{
+  &__icon {
     margin-right: 1rem;
   }
 }
@@ -42,8 +42,7 @@
   background-color: $primary-color;
   margin-top: -18px;
 
-  display: flex;
-  flex-direction: column;
+
   // justify-content: space-between;
 
   &__item {
@@ -56,16 +55,16 @@
   }
 
   &__input {
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     border-radius: 2px;
     // background-color: rgba(white, .5);
     font-size: 1.5rem;
     font-family: inherit;
     border: none;
     color: inherit;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
     border-bottom: 3px solid transparent;
-    // width: 100%;
+    width: 100%;
     display: block;
 
     &:focus {
@@ -90,5 +89,4 @@
 
 // INFO WINDOW
 
-/*style the box*/  
- 
+/*style the box*/

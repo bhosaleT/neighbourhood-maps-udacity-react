@@ -32,14 +32,6 @@ export default class LocationList extends React.Component {
       locations: showingLocations
     });
   };
-
-  // componentWillMount() {
-  //   api.discoverLocations().then(locations => {
-  //     this.setState({
-  //       locations: locations
-  //     });
-  //   });
-  // }
   showOptions() {
     this.setState({
       showingOptions: !this.state.showingOptions,
@@ -49,29 +41,32 @@ export default class LocationList extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.showingOptions ?  <div className="location-list">
-          <input
-            className="location-list__input"
-            placeholder="Search Location"
-            onChange={this.handleChange}
-            value={this.state.searchInput}
-            type="text"
-          />
-          <ul>
-            {this.state.locations.map(location => (
-              <li
-                onClick={this.props.openInfoWindow.bind(this, location)}
-                className="location-list__item"
-                key={location.venue.name}
-              >
-                {location.venue.name}
-              </li>
-            ))}
-          </ul>
-        </div> : null }
-        
-        <button onClick={this.showOptions}>Show and hide</button>
+      <div className="list">
+        <button className="button" onClick={this.showOptions}>
+          Show and hide
+        </button>
+        {this.state.showingOptions ? (
+          <div className="location-list">
+            <input
+              className="location-list__input"
+              placeholder="Search Location"
+              onChange={this.handleChange}
+              value={this.state.searchInput}
+              type="text"
+            />
+            <ul>
+              {this.state.locations.map(location => (
+                <li
+                  onClick={this.props.openInfoWindow.bind(this, location)}
+                  className="location-list__item"
+                  key={location.venue.name}
+                >
+                  {location.venue.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
       </div>
     );
   }

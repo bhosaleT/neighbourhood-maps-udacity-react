@@ -238,7 +238,6 @@ export default class Map extends React.Component {
     return (
       <div className="body-content">
         <LocationList
-          className="location-list"
           closeInfoWindow={this.closeInfoWindow}
           openInfoWindow={this.openInfoWindow}
           allLocations={this.state.locations}

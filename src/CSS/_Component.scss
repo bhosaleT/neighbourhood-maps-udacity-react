@@ -1,4 +1,9 @@
 /* THIS IS THE HEADER COMPONENT */
+html,body{
+  margin: 0;
+  padding: 0;
+}
+
 
 .header {
   background-color: $primary-color;
@@ -26,17 +31,7 @@
   padding: 0;
 }
 
-.body-content {
-  display: flex;
-  // flex-direction: column;
-  &__list {
-    flex: 0 0 18%;
-  }
 
-  &__map {
-    flex: 1;
-  }
-}
 
 .location-list {
   background-color: $primary-color;
@@ -64,7 +59,7 @@
     color: inherit;
     margin-bottom: 2rem;
     border-bottom: 3px solid transparent;
-    width: 100%;
+    // width: 100%;
     display: block;
 
     &:focus {
@@ -87,6 +82,42 @@
   text-align: left;
 }
 
-// INFO WINDOW
+/*  BUTTON */
+.button {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: white;
+  background: #272727;
+  padding: 8px 20px;
+  /* border-radius: 10px; */
+  border: none;
+  /* box-shadow: 2px 3px #888888; */
+  transition: all 0.2s;
+  font-size: 12px;
+  // margin-top: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+}
 
-/*style the box*/
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.9);
+}
+.button:focus {
+  outline: none;
+}
+.button:active {
+  transform: translateY(-1px);
+  outline: none;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.9);
+}
+
+
+.list{
+  margin-top: -18px;
+  padding: 0;
+}

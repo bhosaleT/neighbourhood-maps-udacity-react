@@ -1,12 +1,11 @@
 import axios from "axios";
-import { assertExpressionWrapper } from "babel-types";
 
 export default {
   discoverLocations() {
     const discoverURL = "https://api.foursquare.com/v2/venues/explore?";
     const discoverParams = {
       client_id: "KMDK0FOEEB5PV5MJSBM0L2IWM5TP0G45415PQZT1SWOMLBXA",
-      client_secret: "NW5R1KYT0OUMOKZ1H3M0KYQTA5JRYBAX4GENMV3XBX3GTQFK",
+      client_secret: "5HN5WGHUHAMYR5EPUD3G3XPNBAQ0FJITLHRWJI3DPFWO4DCK",
       near: "Mumbai",
       limit: "12",
       v: "20181020"
@@ -26,8 +25,9 @@ export default {
     const locationDetailsURL = `https://api.foursquare.com/v2/venues/${venueId}?`;
     const detailsParams = {
       client_id: "KMDK0FOEEB5PV5MJSBM0L2IWM5TP0G45415PQZT1SWOMLBXA",
-      client_secret: "NW5R1KYT0OUMOKZ1H3M0KYQTA5JRYBAX4GENMV3XBX3GTQFK",
-      v: "20181020"
+      client_secret: "5HN5WGHUHAMYR5EPUD3G3XPNBAQ0FJITLHRWJI3DPFWO4DCK",
+      v: "20181027",
+      limit: "1"
     };
 
     return axios
@@ -36,7 +36,7 @@ export default {
         return response.data.response.venue;
       })
       .catch(error => {
-        return `Something went wrong` + assertExpressionWrapper;
+        return `Something went wrong ` + error;
       });
   }
 };

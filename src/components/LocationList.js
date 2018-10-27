@@ -1,5 +1,4 @@
 import React from "react";
-import api from "./utils/api";
 
 export default class LocationList extends React.Component {
   constructor(props) {
@@ -37,36 +36,38 @@ export default class LocationList extends React.Component {
       showingOptions: !this.state.showingOptions,
       locations: this.props.allLocations
     });
+    const sideBar = document.querySelector(".location-list");
+    sideBar.style.display === "none"
+      ? (sideBar.style.display = "block")
+      : (sideBar.style.display = "none");
   }
 
   render() {
     return (
       <div className="list">
         <button className="button" onClick={this.showOptions}>
-          Show and hide
+          {this.state.showingOptions ? "Hide Options " : "Show Options"}
         </button>
-        {this.state.showingOptions ? (
-          <div className="location-list">
-            <input
-              className="location-list__input"
-              placeholder="Search Location"
-              onChange={this.handleChange}
-              value={this.state.searchInput}
-              type="text"
-            />
-            <ul>
-              {this.state.locations.map(location => (
-                <li
-                  onClick={this.props.openInfoWindow.bind(this, location)}
-                  className="location-list__item"
-                  key={location.venue.name}
-                >
-                  {location.venue.name}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ) : null}
+        <div className="location-list">
+          <input
+            className="location-list__input"
+            placeholder="Search Location"
+            onChange={this.handleChange}
+            value={this.state.searchInput}
+            type="text"
+          />
+          <ul>
+            {this.state.locations.map(location => (
+              <li
+                onClick={this.props.openInfoWindow.bind(this, location)}
+                className="location-list__item"
+                key={location.venue.name}
+              >
+                {location.venue.name}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     );
   }

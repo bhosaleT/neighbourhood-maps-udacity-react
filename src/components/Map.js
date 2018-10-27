@@ -235,16 +235,12 @@ export default class Map extends React.Component {
   }
 
   render() {
-    return (
-      <div className="body-content">
-        <LocationList
-          closeInfoWindow={this.closeInfoWindow}
-          openInfoWindow={this.openInfoWindow}
-          allLocations={this.state.locations}
-        />
-        <div className="body-content__map" id="map" />
-      </div>
-    );
+    return <div className="body-content">
+        <LocationList closeInfoWindow={this.closeInfoWindow} openInfoWindow={this.openInfoWindow} allLocations={this.state.locations} />
+        <div className="map-container">
+          <div className="body-content__map" id="map" />
+        </div>
+      </div>;
   }
 }
 

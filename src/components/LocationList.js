@@ -32,45 +32,57 @@ export default class LocationList extends React.Component {
     });
   };
   showOptions() {
-    this.setState({
-      showingOptions: !this.state.showingOptions,
-      locations: this.props.allLocations
-    }, this.showSideBar);
-    
+    this.setState(
+      {
+        showingOptions: !this.state.showingOptions,
+        locations: this.props.allLocations
+      },
+      this.showSideBar
+    );
+
     // sideBar.style.display === "none"
     //   ? (sideBar.style.display = "block")
     //   : (sideBar.style.display = "none");
-    
   }
-  
-  showSideBar(){
+
+  showSideBar() {
     const sideBar = document.querySelector(".location-list");
-    if(this.state.showingOptions === true){
-      sideBar.style.left = "0"
-     }else{
-       sideBar.style.left = "-700px"
-     }
+    if (this.state.showingOptions === true) {
+      sideBar.style.left = "0";
+    } else {
+      sideBar.style.left = "-700px";
+    }
   }
 
   render() {
-    return <div className="list">
+    return (
+      <div className="list">
         <button className="button" onClick={this.showOptions}>
-          {this.state.showingOptions ? "Hide Options " : "Show Options"}
-        </button>
+          {" "}
+          {this.state.showingOptions ? "Hide Options " : "Show Options"}{" "}
+        </button>{" "}
         <div className="location-list">
-          <input className="location-list__input" placeholder="Search Location" onChange={this.handleChange} value={this.state.searchInput} type="text" />
+          <input
+            className="location-list__input"
+            placeholder="Search Location"
+            onChange={this.handleChange}
+            value={this.state.searchInput}
+            type="text"
+          />
           <ul>
+            {" "}
             {this.state.locations.map(location => (
               <li
                 onClick={this.props.openInfoWindow.bind(this, location)}
                 className="location-list__item"
                 key={location.venue.name}
               >
-                {location.venue.name}
+                {location.venue.name}{" "}
               </li>
-            ))}
-          </ul>
-        </div>
-      </div>;
+            ))}{" "}
+          </ul>{" "}
+        </div>{" "}
+      </div>
+    );
   }
 }

@@ -46,9 +46,9 @@ export default class LocationList extends React.Component {
   showSideBar(){
     const sideBar = document.querySelector(".location-list");
     if(this.state.showingOptions === true){
-      sideBar.style.display = "block"
+      sideBar.style.left = "0"
      }else{
-       sideBar.style.display ="none"
+       sideBar.style.left = "-700px"
      }
   }
 

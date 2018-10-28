@@ -82,11 +82,17 @@ body {
     list-style: none;
     word-wrap: break-word;
     cursor: pointer;
+    transition: all 0.3s;
 
     @media screen and (max-width: 600px) {
       font-size: 1.2rem;
       padding: 0.5rem 0.5rem;
     }
+  }
+
+  &__item:hover {
+    background: #eeeeee;
+    color: #272727;
   }
 
   &__input {

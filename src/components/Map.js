@@ -24,6 +24,11 @@ export default class Map extends React.Component {
     infowindow: ""
   };
 
+  /* 
+  -- calling the FOURSQUARE API to  get thelocations.
+  -- set state the locations
+  */
+
   componentDidMount() {
     api.discoverLocations().then(locations => {
       this.setState(
@@ -34,6 +39,12 @@ export default class Map extends React.Component {
       );
     });
   }
+
+  /* SELECT MARKER
+  -- I wanted to show a different marker[Image] based on what kind of location I am showing.
+  -- So this bunch of if statements will set the state for the marker image based on the location type. 
+  */
+
 
   selectMarker(currentLocationType) {
     if (currentLocationType === "Hotel") {
@@ -66,7 +77,9 @@ export default class Map extends React.Component {
       });
     }
   }
-
+  /* 
+  -- Loading the map and initialising it.
+*/
   loadMap = () => {
     loadScript(
       "https://maps.googleapis.com/maps/api/js?key=AIzaSyCgByDyHejXcnEYiAohk2kMYN0npMXsJTc&callback=initMap"
@@ -74,9 +87,12 @@ export default class Map extends React.Component {
     window.initMap = this.initMap;
   };
 
+  /* 
+  -- Creating the MAP.
+  */
   initMap = () => {
     var self = this;
-
+     /* Light Grey style for the map obtained from snazzy maps. */
     var styles = [
       {
         featureType: "landscape",
@@ -161,7 +177,7 @@ export default class Map extends React.Component {
         ]
       }
     ];
-
+    /* setting up the map */
     var map = new window.google.maps.Map(document.getElementById("map"), {
       center: {
         lat: 19.0,
@@ -173,11 +189,12 @@ export default class Map extends React.Component {
       // gestureHandling: "greedy",
       // mapTypeControl: false
     });
-
+    
     window.google.maps.event.addListener(map, "click", function() {
       self.closeInfoWindow();
     });
-
+    
+    /* Initialising the infoWindow */
     var infowindow = new window.google.maps.InfoWindow({});
 
     this.setState({
@@ -188,7 +205,10 @@ export default class Map extends React.Component {
     var allLocations = [];
     this.state.locations.forEach(location => {
       this.selectMarker(location.venue.categories[0].name);
-
+       /* Creating the marker
+       -- adding .marker and .display to location element
+       -- adding an event listener to the marker.
+       */
       var marker = new window.google.maps.Marker({
         position: {
           lat: location.venue.location.lat,
@@ -208,12 +228,16 @@ export default class Map extends React.Component {
 
       allLocations.push(location);
     });
-
+    /* Readding the locations list to the state with marker information added to it. */
     this.setState({
       locations: allLocations
     });
   };
-
+  
+  /* 
+  -- The openInfoWindow takes in the location element.
+  -- From it we call the getWindowData which will call our foursquare API and get venue details.
+  */
   openInfoWindow(location) {
     this.closeInfoWindow();
     this.state.infowindow.open(this.state.map, location.marker);
@@ -224,7 +248,11 @@ export default class Map extends React.Component {
   closeInfoWindow() {
     this.state.infowindow.close();
   }
-
+  
+  /* GET WINDOW DATA
+   -- Call the API using venue.id .
+   -- Formatting the data in the form I want it to be shown.
+  */
   getWindowData(location) {
     var self = this;
     var venueId = location.venue.id;
@@ -273,6 +301,10 @@ export default class Map extends React.Component {
     );
   }
 }
+
+/* LOADSCRIPT
+-- Add the map script to html.
+*/
 
 function loadScript(url) {
   var index = window.document.getElementsByTagName("script")[0];

@@ -13,6 +13,12 @@ export default class LocationList extends React.Component {
     showingOptions: false
   };
 
+  /* HANDLE CHANGE 
+  -- HANDLING THE INPUT CHANGE TO FILTER LOCATIONS LIST.
+  -- setting the marker visible and invisible based on the filtering list.
+  -- Adding the new list to the locations state.
+  */
+
   handleChange = event => {
     const query = event.target.value.trim();
 
@@ -31,6 +37,8 @@ export default class LocationList extends React.Component {
       locations: showingLocations
     });
   };
+
+  /* Changing the text of the Show/Hide buttons and triggering the visibility of the options list. */
   showOptions() {
     this.setState(
       {

@@ -17,12 +17,12 @@ To start the project run `npm start` from the terminal.
 * [Google Maps API](https://developers.google.com/maps/documentation/) - Google Maps API.
 * [FourSquare API](https://developer.foursquare.com/) - FourSquare API.
 
-## ScreenShots
-###Desktop
+# ScreenShots
+##Desktop
 ![When in Mumbai](./src/images/screenshots/complete.png)
-###InfoWindow
+##InfoWindow
 ![InfoWindow](./src/images/screenshots/infowindow.png)
-###Mobile view
+##Mobile view
 ![Mobile view](./src/images/screenshots/mobile.png)
-###Mobile view-options
+##Mobile view-options
 ![Mobile view-options](./src/images/screenshots/mobile-option.png)

@@ -20,14 +20,14 @@ To start the project run `npm start` from the terminal.
 
 # ScreenShots
 
-##Desktop
+### Desktop
 ![When in Mumbai](./src/images/screenshots/complete.png)
 
-##InfoWindow
+### InfoWindow
 ![InfoWindow](./src/images/screenshots/infowindow.png)
 
-##Mobile view
+### Mobile view
 ![Mobile view](./src/images/screenshots/mobile.png)
 
-##Mobile view-options
+### Mobile view-options
 ![Mobile view-options](./src/images/screenshots/mobile-option.png)

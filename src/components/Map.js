@@ -169,9 +169,9 @@ export default class Map extends React.Component {
       },
       zoom: 12.5,
       styles: styles,
-      disableDefaultUI: true,
+      disableDefaultUI: true
       // gestureHandling: "greedy",
-      mapTypeControl: false
+      // mapTypeControl: false
     });
 
     window.google.maps.event.addListener(map, "click", function() {
@@ -237,14 +237,22 @@ export default class Map extends React.Component {
       }
       var prefix = response.bestPhoto.prefix;
       var suffix = response.bestPhoto.suffix;
-      var imgSrc = `${prefix}200x200${suffix}`;
-      var reply = `<div id="google-popup">
-      <h3>${response.name}</h3>
+      var imgSrc = `${prefix}100x100${suffix}`;
+      var reply = `<div id="iw-container">
+      <h2 class="iw-title">${response.name}</h2>
+      <div class="iw-content">
+      <h4 class="iw-subTitle">Visit:</h4>
       <img src=${imgSrc}>
-      <a href=${response.canonicalUrl}>Visti ${response.name} on foursquare </a>
-      <p>${response.location.formattedAddress}</p>
+      <a href=${response.canonicalUrl}>${response.name}</a>
+       <h4 class="iw-subTitle">Contacts:</h4>
+      <p>${response.location.formattedAddress[0]}</p>
+      <p>${response.location.formattedAddress[1]}</p>
+      <p>${response.location.formattedAddress[2]}</p>
+      <p>${response.location.formattedAddress[3]}</p>
       <p>${number}</p>
+        <h4 class="iw-subTitle">Rating:</h4>
       <p>Rating: ${response.rating} </p>
+      </div>
       </div>`;
       self.state.infowindow.setContent(reply);
     });

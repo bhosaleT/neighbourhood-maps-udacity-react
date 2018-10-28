@@ -16,13 +16,18 @@ To start the project run `npm start` from the terminal.
 * [React](https://reactjs.org/) - React Front-End Framework.
 * [Google Maps API](https://developers.google.com/maps/documentation/) - Google Maps API.
 * [FourSquare API](https://developer.foursquare.com/) - FourSquare API.
+* [Sass](https://sass-lang.com/) - Sass
 
 # ScreenShots
+
 ##Desktop
 ![When in Mumbai](./src/images/screenshots/complete.png)
+
 ##InfoWindow
 ![InfoWindow](./src/images/screenshots/infowindow.png)
+
 ##Mobile view
 ![Mobile view](./src/images/screenshots/mobile.png)
+
 ##Mobile view-options
 ![Mobile view-options](./src/images/screenshots/mobile-option.png)

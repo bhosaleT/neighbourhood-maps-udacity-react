@@ -41,10 +41,8 @@ export default class Map extends React.Component {
   }
 
   /* SELECT MARKER
-  -- I wanted to show a different marker[Image] based on what kind of location I am showing.
-  -- So this bunch of if statements will set the state for the marker image based on the location type. 
+  -- Showing different markers for different type of markers.
   */
-
 
   selectMarker(currentLocationType) {
     if (currentLocationType === "Hotel") {
@@ -92,7 +90,7 @@ export default class Map extends React.Component {
   */
   initMap = () => {
     var self = this;
-     /* Light Grey style for the map obtained from snazzy maps. */
+    /* Light Grey style for the map obtained from snazzy maps. */
     var styles = [
       {
         featureType: "landscape",
@@ -189,11 +187,11 @@ export default class Map extends React.Component {
       // gestureHandling: "greedy",
       // mapTypeControl: false
     });
-    
+
     window.google.maps.event.addListener(map, "click", function() {
       self.closeInfoWindow();
     });
-    
+
     /* Initialising the infoWindow */
     var infowindow = new window.google.maps.InfoWindow({});
 
@@ -205,7 +203,7 @@ export default class Map extends React.Component {
     var allLocations = [];
     this.state.locations.forEach(location => {
       this.selectMarker(location.venue.categories[0].name);
-       /* Creating the marker
+      /* Creating the marker
        -- adding .marker and .display to location element
        -- adding an event listener to the marker.
        */
@@ -233,7 +231,7 @@ export default class Map extends React.Component {
       locations: allLocations
     });
   };
-  
+
   /* 
   -- The openInfoWindow takes in the location element.
   -- From it we call the getWindowData which will call our foursquare API and get venue details.
@@ -248,7 +246,7 @@ export default class Map extends React.Component {
   closeInfoWindow() {
     this.state.infowindow.close();
   }
-  
+
   /* GET WINDOW DATA
    -- Call the API using venue.id .
    -- Formatting the data in the form I want it to be shown.
